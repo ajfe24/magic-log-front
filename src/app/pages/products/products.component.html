@@ -1,0 +1,32 @@
+<div class="container m-5">
+  <h2>Lista de Productos</h2>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Buscar por nombre, SKU, cantidad o precio" [(ngModel)]="searchTerm" (keyup)="applyFilters()" style="width: 50%;">
+    <button mat-mini-fab class="add-button" color="primary" (click)="goToCreateProduct()" style="margin-left: 10px;">
+      <mat-icon>+</mat-icon>
+    </button>
+  </div>
+  <table class="m-5" mat-table [dataSource]="filteredProducts"  >
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef >Nombre</th>
+      <td mat-cell *matCellDef="let product"  class="name-select" (click)="selectProduct(product)">{{ product.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="sku">
+      <th mat-header-cell *matHeaderCellDef >SKU</th>
+      <td mat-cell *matCellDef="let product">{{ product.sku }}</td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef >Cantidad</th>
+      <td mat-cell *matCellDef="let product">{{ product.quantity }}</td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef >Precio</th>
+      <td mat-cell *matCellDef="let product">{{ product.price }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['name', 'sku', 'quantity', 'price']"></tr>
+    <tr mat-row  *matRowDef="let row; columns: ['name', 'sku', 'quantity', 'price']"></tr>
+  </table>
+  <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

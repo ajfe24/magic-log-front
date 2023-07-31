@@ -1,0 +1,10 @@
+.add-button {
+  position: relative;
+  float: right;
+}
+
+.name-select {
+  color: blue !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}

@@ -1,0 +1,73 @@
+<!-- Start Featured Product -->
+<section class="bg-light">
+  <div class="container py-5">
+    <div class="row text-center py-3">
+      <h1 class="h1">Productos</h1>
+      <div class="col-lg-10 m-auto">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label>Buscar por nombre, SKU</label>
+              <input type="text" class="form-control" placeholder="Buscar por nombre, SKU" [(ngModel)]="searchTerm"
+                     (keyup)="applyFilters()">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <!-- Combo para el rango de precios -->
+              <label for="priceRange">Rango de precios:</label>
+              <select class="form-control" id="priceRange" [(ngModel)]="selectedPriceRange"
+                      (change)="applyFilters()">
+                <option value="null">Todos</option>
+                <option *ngFor="let range of priceRanges" [ngValue]="range">{{ range.label }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            <button mat-raised-button (click)="clearFilters()" color="primary" style="margin-left: 10px;">
+              Limpiar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let product of filteredProducts " class="col-12 col-md-4 mb-4">
+        <div class="card h-100">
+          <a>
+            <img src="./assets/img/product-icon.png" class="card-img-top" alt="...">
+          </a>
+          <div class="card-body">
+            <ul class="list-unstyled d-flex justify-content-between">
+              <li>
+                <i class="text-warning fa fa-star"></i>
+                <i class="text-warning fa fa-star"></i>
+                <i class="text-warning fa fa-star"></i>
+                <i class="text-muted fa fa-star"></i>
+                <i class="text-muted fa fa-star"></i>
+              </li>
+              <li class="text-muted text-right">{{ product.price | currency:'MXN' }}</li>
+            </ul>
+            <a class="h2 text-decoration-none text-dark">{{product.name}}</a>
+            <p><label>SKU: {{product.sku}}</label></p>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
+            </p>
+            <div class="row">
+              <div class="col-md-5">
+                <p class="text-muted text-sm-start" style="font-size: smaller!important;">Existencias ({{product.quantity}})</p>
+              </div>
+              <div class="col-md-7 text-end">
+                <button mat-raised-button color="accent" style="margin-left: 10px;">
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Featured Product -->
+
